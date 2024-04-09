@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <form action="" id="form">
+         <input type="text" name="" id="image" placeholder="Online image url"><br><br>
+         <input type="text" id="name" placeholder="Name"><br><br>
+         <input type="email" id="email" placeholder="Email"><br><br>
+         <input type="number" id="number" placeholder="Phone Number"><br><br>
+         <button id="btn">Submit</button>
+    </form>
+    <table border="2px" cellspacing="2px" cellpadding="2px" width="50%">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <h3 id="count"></h3>
+        <tbody class="view">
+            
+        </tbody>
+    </table>
+</body>
+<script>
+    let count=0;
+    document.getElementById("form").addEventListener("submit",function(event){
+        event.preventDefault();
+
+        let image=document.getElementById("image").value
+        let name=document.getElementById("name").value
+        let email=document.getElementById("email").value
+        let number=document.getElementById("number").value
+
+        let obj={
+            image:image,
+            name:name,
+            email:email,
+            number:number,
+        }
+        console.log(obj);
+
+        let t=document.createElement("tr")
+
+        let i=document.createElement("img")
+        i.src=obj.image
+        let n=document.createElement("td")
+        n.innerHTML=obj.name
+        let e=document.createElement("td")
+        e.innerHTML=obj.email
+        let num=document.createElement("td")
+        num.innerHTML=obj.number
+        if(num ==10){
+            num.style.background="green"
+        }
+
+        let d=document.createElement("td")
+        d.innerHTML="Delete"
+
+        d.addEventListener("click",function(event){
+            event.target.parentNode.remove()
+            count=count-1
+            document.getElementById("count").innerHTML=`Id:-${count}`
+        })
+
+        count=count+1
+        document.getElementById("count").innerHTML=`Id:-${count}`
+
+        t.append(i,n,e,num,d)
+        document.querySelector("tbody").append(t)
+    })
+</script>
+</html>
